@@ -1,0 +1,74 @@
+
+        /* Stock-Game styling */
+        
+        body {
+  font-family: Arial, sans-serif;
+  background-color: #F5F5F5;
+  padding: 10px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  color: #0066CC;
+}
+
+canvas#chart {
+  display: block;
+  margin: 30px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+p {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+p span {
+  font-weight: bold;
+  color: #0066CC;
+}
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #0066CC;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #004C99;
+}
+
+h4 {
+  text-align: center;
+  margin-top: 30px;
+  color: #666;
+}
+
+h4 button {
+  margin-left: 5px;
+  padding: 2px 5px;
+  background-color: #0066CC;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+h4 button:hover {
+  background-color: #004C99;
+}
+
+		canvas {
+			border: 1px solid black;
+			width: 800px;
+			height: 400px;
+		}

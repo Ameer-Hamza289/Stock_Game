@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stock Market Game Registration</title>
+
+    <style>
+     body {
+  font-family: Arial, sans-serif;
+  background-color: #F5F5F5;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  color: #0066CC;
+}
+
+form {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+ button {
+  display: block;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #0066CC;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #004C99;
+}
+
+    </style>
+  </head>
+  <body>
+    <h1>Stock Market Game Registration</h1>
+    <form onsubmit="return validateAge()" >
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="18" max="120" required>
+        
+        <!-- <a href="Stock-Game.html"><button type="submit">Start Game</button></a> -->
+        <button type="submit"><a href="./Stock-Game.html">Start Game</a></button>
+      </form>
+      
+    <script>
+      function validateAge() {
+        var ageInput = document.getElementById("age");
+        var age = parseInt(ageInput.value);
+        if (age < 18) {
+          alert("You must be at least 18 years old to play the stock market game.");
+          ageInput.focus();
+          return false;
+        }
+        return true;
+      }
+      var button = document.querySelector("button");
+      button.addEventListener("click", function() {
+    window.location.href = "";
+  });
+
+      
+    </script>
+  </body>
+</html>

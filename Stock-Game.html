@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stock Market Game</title>
+	<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <h1>Stock Trading Game</h1>
+	<canvas id="chart"></canvas>
+	<p>Price: <span id="price"></span></p>
+	<p>Balance: <span id="balance">50000.00€</span></p>
+	<p>Shares owned: <span id="shares">0</span></p>
+	<button onclick="buy()">Buy</button>
+	<button onclick="sell()">Sell</button>
+    <p>Profit/Loss: <span id="pl">0.00€</span></p>
+    <h4>The game will end after 10 mins or you can end it by using <button  onclick="endTimeout()">END</button>button</h4>
+
+</body>
+<script>
+	 // Define variables
+	 var price = 100; // Starting price
+ var spread = 1; // Bid-ask spread
+ var balance = 50000; // Starting balance
+ var sharesOwned =(+ 0); // Starting number of shares owned
+ var chart = document.getElementById("chart").getContext("2d");
+ var priceElement = document.getElementById("price");
+ var balanceElement = document.getElementById("balance");
+ var sharesElement = document.getElementById("shares");
+ 
+ // Define functions
+ function updatePrice() {
+     // Calculate price change
+     var change = (Math.random() * 0.04 + 0.01) * (Math.random() < 0.5 ? -1 : 1);
+     // console.log(change);
+     price += change;
+ 
+     // Update bid and ask prices
+     var ask = price + spread / 2;
+     var bid = price - spread / 2;
+ 
+     // Calculate profit/loss
+     var currentPL = sharesOwned * (price - (spread / 2)) - balance;
+ 
+     // Draw chart
+     chart.fillStyle = "#eeeee4";
+     chart.fillRect(0, 0, chart.canvas.width, chart.canvas.height);
+     chart.strokeStyle = "blue";
+     chart.beginPath();
+     chart.moveTo(0, (chart.canvas.height - ((price - 50) * 4)));
+     for (var i = 1; i < chart.canvas.width; i++) {
+         var c = (Math.random() < 0.5 ? -1 : 1) * Math.random() * 0.1;
+         price += c;
+         ask = price + spread / 2;
+         bid = price - spread / 2;
+         chart.lineTo(i, chart.canvas.height - ((price - 80) * 4));
+     }
+     chart.stroke();
+ 
+     // Update price display
+     priceElement.textContent = bid.toFixed(2) + "€ - " + ask.toFixed(2)+"€";
+     if(sharesOwned==0){
+         currentPL=0;
+     }
+ 
+     var plElement = document.getElementById("pl");
+     if (currentPL >= 0) {
+         plElement.style.color = "green";
+         plElement.textContent = "+" + currentPL.toFixed(2) + "€";
+     } else {
+         plElement.style.color = "red";
+         plElement.textContent = currentPL.toFixed(2) + "€";
+     }
+ 
+ }
+ 
+ function buy() {
+     var quantity = prompt("How many shares do you want to buy?");
+     var cost =Number( quantity * (price + spread / 2));
+     if (cost > balance) {
+         alert("Insufficient funds!");
+         return;
+     }
+     balance -= cost;
+     (sharesOwned) += (+quantity);
+     balanceElement.textContent = balance.toFixed(2);
+     sharesElement.textContent =( sharesOwned);
+ }
+ 
+ function sell() {
+     var quantity = prompt("How many shares do you want to sell?");
+     if (quantity > sharesOwned) {
+         alert("You don't have that many shares!");
+         return;
+     }
+     var revenue = quantity * (price - spread / 2);
+     balance += revenue;
+     sharesOwned -= quantity;
+     balanceElement.textContent = balance.toFixed(2);
+     sharesElement.textContent =( sharesOwned);
+ }
+ 
+ // Update price every second
+ const intervalId = setInterval(updatePrice, 1000);
+ setTimeout(function() {
+   clearInterval(intervalId);
+   alert("Game Over!!")
+ }, 600000);
+ 
+
+ //end button will stop execution once clicked
+ function endTimeout(){
+     clearInterval(intervalId);
+     alert("Game Over!!")
+ }
+     
+ 
+ 
+</script>
+</html>
